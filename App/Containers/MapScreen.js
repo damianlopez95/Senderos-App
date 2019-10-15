@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 
+import SenderosGeoJSON from './senderos-pn-tdf.json'
 import MapboxGL from "@react-native-mapbox-gl/maps";
 
 import styles from './Styles/MapScreenStyles'
@@ -31,19 +32,20 @@ export default class MapScreen extends Component {
             styleURL={'mapbox://styles/dami-lopez95/ck1cq13s113cw1co4bncw4eqt'}
           >
             <MapboxGL.Camera
-              //longitud, latitud
+              //zoom coincidente con mapa offline
+              minZoomLevel={14}
+              maxZoomLevel={20}
               zoomLevel={14}
+              //longitud, latitud
               centerCoordinate={[-68.500416, -54.841684]}
               maxBounds={{ne: [-68.435974, -54.795375], sw: [-68.620916, -54.916526]}}
             />
-            <MapboxGL.VectorSource 
-              url={'./senderos-pn-tdf.geojson'}
-            >
-              <MapboxGL.LineLayer 
+            <MapboxGL.ShapeSource id="senderosSource" shape={SenderosGeoJSON}>
+              <MapboxGL.LineLayer
                 id="senderos-pn-tdf"
-                sourceID={'./senderos-pn-tdf.geojson'}
+                style={{ lineColor: 'red', lineWidth: 7, visibility: 'visible' }}
               />
-            </MapboxGL.VectorSource>
+            </MapboxGL.ShapeSource>
           </MapboxGL.MapView>
         </View>
       );
