@@ -9,7 +9,7 @@ const create = (baseURL = 'https://sib.gob.ar/api/2.0.0') => {
    })
 
 
-   const getId = (id) => api.get(`/sendero/${id}`)
+   const getId = (id) => api.get(`/senderos/${id}`)
    // const getList = () => api.get('list')
    // const search = (name) => api.get('search/sendero', {q: name})
    // const getId = () => ({
