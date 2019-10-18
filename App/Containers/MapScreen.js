@@ -24,6 +24,11 @@ export default class MapScreen extends Component {
         }, progressListener, null)
       }
 
+      onSourceLayerPress(e) {
+        const feature = e.nativeEvent.payload;
+        console.log('layer pressed ', feature);
+    }
+
     render() {
       return (
         <View style={styles.map_container}>
@@ -40,7 +45,11 @@ export default class MapScreen extends Component {
               centerCoordinate={[-68.500416, -54.841684]}
               maxBounds={{ne: [-68.435974, -54.795375], sw: [-68.620916, -54.916526]}}
             />
-            <MapboxGL.ShapeSource id="senderosSource" shape={SenderosGeoJSON}>
+            <MapboxGL.ShapeSource 
+              id="senderosSource"
+              shape={SenderosGeoJSON}
+              onPress={this.onSourceLayerPress}  
+            >
               <MapboxGL.LineLayer
                 id="senderos-pn-tdf"
                 style={{ lineColor: 'red', lineWidth: 7, visibility: 'visible' }}

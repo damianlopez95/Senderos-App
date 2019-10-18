@@ -10,6 +10,8 @@ import { createStackNavigator, createDrawerNavigator, createAppContainer } from 
 
 import FirstScreen from '../Containers/FirstScreen'
 import MapScreen from '../Containers/MapScreen'
+import TrailListScreen from '../Containers/TrailListScreen'
+import TrailScreen from '../Containers/TrailScreen'
 
 import styles from './Styles/NavigationStyles'
 import SideMenu from './SideMenu'
@@ -63,12 +65,48 @@ const Screen2_StackNavigator = createStackNavigator({
   },
 });
 
+//Stack Navigator for the Third Option of Navigation Drawer
+const Screen3_StackNavigator = createStackNavigator({
+  //All the screen from the Second Option will be indexed here
+  Third: {
+    screen: TrailListScreen,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Lista de Senderos',
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+ 
+      headerStyle: {
+        backgroundColor: '#2ECC40',
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+});
+
+//Stack Navigator for the Third Option of Navigation Drawer
+const Screen4_StackNavigator = createStackNavigator({
+  //All the screen from the Second Option will be indexed here
+  Fourth: {
+    screen: TrailScreen,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Sendero',
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+ 
+      headerStyle: {
+        backgroundColor: '#2ECC40',
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+});
+
 //Drawer Navigator for the Navigation Drawer / Sidebar
 const Drawer = createDrawerNavigator(
   {
     //Drawer Optons and indexing
     NavScreen1: { screen: FirstActivity_StackNavigator },
     NavScreen2: { screen: Screen2_StackNavigator },
+    NavScreen3: { screen: Screen3_StackNavigator },
+    NavScreen4: { screen: Screen4_StackNavigator },
   },
   {
     contentComponent: SideMenu,
@@ -76,4 +114,3 @@ const Drawer = createDrawerNavigator(
   }
 );
 export default createAppContainer(Drawer);
-

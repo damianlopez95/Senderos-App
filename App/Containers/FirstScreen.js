@@ -22,7 +22,7 @@ export default class FirstScreen extends Component {
         <View style={styles.btnSenderos}>
           <Button 
             title="Ver senderos"
-            onPress={() => this.props.navigation.navigate('MapScreen')}
+            onPress={() => this.props.navigation.navigate('NavScreen2')}
           />
         </View>
       </View>

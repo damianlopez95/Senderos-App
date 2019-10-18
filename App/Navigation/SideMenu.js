@@ -21,7 +21,8 @@ class SideMenu extends Component {
       {
         mainHeading: 'Contenidos',
         subOptions: [
-          { secondaryHeading: 'Senderos', navigationPath: 'Second' },
+          { secondaryHeading: 'Mapa con Senderos', navigationPath: 'Second' },
+          { secondaryHeading: 'Lista de Senderos', navigationPath: 'Third' },
         ],
       },
     ];
