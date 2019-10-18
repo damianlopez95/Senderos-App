@@ -1,6 +1,6 @@
 import apisauce from 'apisauce'
 
-const create = (baseURL = 'https://sib.gob.ar/api/2.0.0/senderos') => {
+const create = (baseURL = 'https://sib.gob.ar/api/2.0.0') => {
 
    const api = apisauce.create({
       baseURL,
@@ -9,17 +9,17 @@ const create = (baseURL = 'https://sib.gob.ar/api/2.0.0/senderos') => {
    })
 
 
-   // const getId = () => api.get('1')
+   const getId = (id) => api.get(`/sendero/${id}`)
    // const getList = () => api.get('list')
    // const search = (name) => api.get('search/sendero', {q: name})
-   const getId =  {
-      "id": 1,
-      "nombre":'Lon Andes',
-      "imagen": 'https://picsum.photos/300/200',
-      "descripcion": 'Descripcion de un sendero'
-   }
+   // const getId = () => ({
+   //    "id": '1',
+   //    "nombre":'Lon Andes',
+   //    "imagen": 'https://picsum.photos/300/200',
+   //    "descripcion": 'Descripcion de un sendero'
+   // })
 
-   const getList =[
+   const getList =() => ([
       {
          "id": 1,
          "nombre":'Lon Andes',
@@ -44,7 +44,7 @@ const create = (baseURL = 'https://sib.gob.ar/api/2.0.0/senderos') => {
          "imagen": 'https://picsum.photos/300/200',
          "descripcion": 'Descripcion de un sendero'
       },
-   ]
+   ])
 
    return {
       getId,
