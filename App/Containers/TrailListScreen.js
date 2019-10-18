@@ -1,22 +1,21 @@
 import React from 'react'
 import { View, ListView, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
-//import trails from 'API'
+import trailsAPI from '../Services/SenderoApi'
 
 export default class TrailListScreen extends React.Component {
 
     constructor(props) {
         super(props);
-        this.setState({
-          //isLoading = true,
-        });
+        this.service = trailsAPI.create();
+        this.state = {
+          isLoading: true,
+        };
     }
 
     componentDidMount () {
-      //extraer lista de la API
       this.setState({
         isLoading: false,
         //asignar lista a variable de state 'trails'
-        trails: null,
       })
     } 
 
@@ -33,8 +32,10 @@ export default class TrailListScreen extends React.Component {
     }
 
     render() {
-
-      if (this.state.isLoading) {
+      this.service.getList()
+      .then(res => console.warn(res.data));
+      return (null)
+      /* if (this.state.isLoading) {
         return (
           <View style={{flex: 1, paddingTop: 20}}>
             <ActivityIndicator />
@@ -50,6 +51,6 @@ export default class TrailListScreen extends React.Component {
             renderRow={this.renderRow.bind(this)}
           />
         </View>
-      );
+      ); */
     } 
 }
