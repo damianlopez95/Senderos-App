@@ -8,9 +8,8 @@ const create = (baseURL = 'https://sib.gob.ar/api/2.0.0') => {
       TIMEOUT: 10000
    })
 
-
    const getId = (id) => api.get(`/senderos/${id}`)
-   // const getList = () => api.get(`/ficha-area-protegida/parque-nacional-los-glaciares/senderos`)
+   const getList = () => api.get(`/ficha-area-protegida/parque-nacional-los-glaciares/senderos`)
    jsonSenderos = {
       "type": "FeatureCollection",
       "name": "senderos-pn-tdf",
@@ -50,7 +49,7 @@ const create = (baseURL = 'https://sib.gob.ar/api/2.0.0') => {
       ]
    }
 
-   const getList = () => Promise.resolve(jsonSenderos)
+   //const getList = () => Promise.resolve(jsonSenderos)
    return {
       getId,
       getList

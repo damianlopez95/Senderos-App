@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { 
   View,
-  Image,
   Text,
   TouchableOpacity,
   Dimensions,
@@ -13,7 +12,7 @@ import MapScreen from '../Containers/MapScreen'
 import TrailListScreen from '../Containers/TrailListScreen'
 import TrailScreen from '../Containers/TrailScreen'
 
-import styles from './Styles/NavigationStyles'
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import SideMenu from './SideMenu'
 
 //Navigation Drawer Structure for all screen
@@ -25,8 +24,7 @@ class NavigationDrawerStructure extends Component {
     return (
       <View style={{ flexDirection: 'row' }}>
         <TouchableOpacity onPress={this.toggleDrawer.bind(this)}>
-          {/*Donute Button Image */}
-          <Text>Menu</Text>
+          <Text style={{ paddingHorizontal: 8 }}><Icon name="menu" style={{ fontSize: 30 }} /></Text>
         </TouchableOpacity>
       </View>
     );
@@ -110,7 +108,7 @@ const Drawer = createDrawerNavigator(
   },
   {
     contentComponent: SideMenu,
-    drawerWidth: Dimensions.get('window').width - 120,
-  }
+    drawerWidth: Dimensions.get('window').width - 120, 
+  },
 );
 export default createAppContainer(Drawer);

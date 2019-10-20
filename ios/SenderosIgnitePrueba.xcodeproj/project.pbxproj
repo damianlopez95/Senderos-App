@@ -64,6 +64,7 @@
 		4DE628AB51B040619DEF7C10 /* libRNDeviceInfo-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3707ED5667D42C18C0E7632 /* libRNDeviceInfo-tvOS.a */; };
 		67CE0A1B5D4E45DF8ACD7F35 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58898C51CD0E47638B0C676F /* libReactNativeConfig.a */; };
 		9DC045834C1C43C499AF21C4 /* libReactNativeConfig-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 935BCA3CAA1B40D68AC8CCED /* libReactNativeConfig-tvOS.a */; };
+		8121E566C4A14BF3B7E862BF /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38408927261147DEB28C9F95 /* Fontisto.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -401,6 +402,7 @@
 		30CDB35A9ED342EE8F33A187 /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; name = "ReactNativeConfig.xcodeproj"; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		58898C51CD0E47638B0C676F /* libReactNativeConfig.a */ = {isa = PBXFileReference; name = "libReactNativeConfig.a"; path = "libReactNativeConfig.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		935BCA3CAA1B40D68AC8CCED /* libReactNativeConfig-tvOS.a */ = {isa = PBXFileReference; name = "libReactNativeConfig-tvOS.a"; path = "libReactNativeConfig-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		38408927261147DEB28C9F95 /* Fontisto.ttf */ = {isa = PBXFileReference; name = "Fontisto.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -699,6 +701,7 @@
 				7705109F8F474F1D8AD9234D /* Octicons.ttf */,
 				0A44C64120B34D6FBC93DC05 /* SimpleLineIcons.ttf */,
 				65B38B114482449C9A984856 /* Zocial.ttf */,
+				38408927261147DEB28C9F95 /* Fontisto.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1165,6 +1168,7 @@
 				E572288DFA1347FCB3EA55EE /* Octicons.ttf in Resources */,
 				719E7371994D4E34A17317F1 /* SimpleLineIcons.ttf in Resources */,
 				F9ADFB5F19C14CAA9DF79BA2 /* Zocial.ttf in Resources */,
+				8121E566C4A14BF3B7E862BF /* Fontisto.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
