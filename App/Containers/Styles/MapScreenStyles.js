@@ -6,5 +6,9 @@ export default StyleSheet.create({
       },
     map: {
       flex: 1
+    },
+    overlay: {
+      position: 'absolute',
+      bottom:0
     }
   })
