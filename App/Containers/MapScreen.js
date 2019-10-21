@@ -16,6 +16,8 @@ export default class MapScreen extends Component {
 
     constructor(props){
       super(props);
+      this.onMapPress = this.onMapPress.bind(this);
+      this.onSourceLayerPress = this.onSourceLayerPress.bind(this);
       this.state ={
         showCard: false,
         cardData: null
@@ -77,7 +79,7 @@ export default class MapScreen extends Component {
         return (
           <Overlay
             isVisible={true}
-            onBackdropPress={this.onMapPress.bind(this)}
+            onBackdropPress={this.onMapPress}
             windowBackgroundColor="rgba(0, 0, 0, .1)"
             overlayBackgroundColor="rgba(0, 0, 0, .2)"
             width={windowWidth}
@@ -123,7 +125,7 @@ export default class MapScreen extends Component {
             <MapboxGL.ShapeSource 
               id="senderosSource"
               shape={SenderosGeoJSON}
-              onPress={this.onSourceLayerPress.bind(this)}
+              onPress={this.onSourceLayerPress}
             >
               <MapboxGL.LineLayer
                 id="senderos-pn-tdf"
