@@ -41,16 +41,20 @@ export default class MapScreen extends Component {
       }); */
 
       MapboxGL.setTelemetryEnabled(false);
-      
+
       progressListener = (offlineRegion, status) => console.log(offlineRegion, status);
+
+      offlinePack = await MapboxGL.offlineManager.getPack('ParqueTDF');
       
-      await MapboxGL.offlineManager.createPack({
-        name: 'ParqueTDF',
-        styleURL: 'mapbox://styles/dami-lopez95/ck1cq13s113cw1co4bncw4eqt',
-        minZoom: 14,
-        maxZoom: 20,
-        bounds: [[-68.435974, -54.795375], [-68.620916, -54.916526]]
-      }, progressListener, null)
+      if (offlinePack == undefined) {
+        await MapboxGL.offlineManager.createPack({
+          name: 'ParqueTDF',
+          styleURL: 'mapbox://styles/dami-lopez95/ck1cq13s113cw1co4bncw4eqt',
+          minZoom: 14,
+          maxZoom: 20,
+          bounds: [[-68.435974, -54.795375], [-68.620916, -54.916526]]
+        }, progressListener, null)
+      }
     }
 
     onMapPress() {
@@ -72,7 +76,7 @@ export default class MapScreen extends Component {
       if (this.state.showCard)
         return (
           <Overlay
-            isVisible={this.state.isVisible}
+            isVisible={true}
             onBackdropPress={this.onMapPress.bind(this)}
             windowBackgroundColor="rgba(0, 0, 0, .1)"
             overlayBackgroundColor="rgba(0, 0, 0, .2)"
@@ -101,9 +105,9 @@ export default class MapScreen extends Component {
             style={styles.map}
             styleURL={'mapbox://styles/dami-lopez95/ck1cq13s113cw1co4bncw4eqt'}
           >
-            <MapboxGL.UserLocation 
-              //visible={true}
-            />
+            {/* <MapboxGL.UserLocation 
+              visible={true}
+            /> */}
             <MapboxGL.Camera
               //zoom coincidente con mapa offline
               minZoomLevel={14}
