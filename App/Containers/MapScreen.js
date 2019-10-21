@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
-import { PermissionsAndroid, View, Text, Dimensions } from 'react-native'
-import { Card, Overlay, Button } from 'react-native-elements'
+import { PermissionsAndroid, View, Text } from 'react-native'
+import { Card, Button } from 'react-native-elements'
 
 import SenderosGeoJSON from './senderos-pn-tdf.json'
 import MapboxGL from "@react-native-mapbox-gl/maps";
 
 import styles from './Styles/MapScreenStyles'
-
-const windowWidth= Dimensions.get('window').width
-const windowHeight = Dimensions.get('window').height
 
 MapboxGL.setAccessToken("pk.eyJ1IjoiZGFtaS1sb3Blejk1IiwiYSI6ImNrMWNtb2M1czB1cnYzZG9ibmo1azg4YnUifQ.pWXJKBT6mu_dRmAF2n9SWw");
 
@@ -77,24 +74,16 @@ export default class MapScreen extends Component {
     renderCard() {
       if (this.state.showCard)
         return (
-          <Overlay
-            isVisible={true}
-            onBackdropPress={this.onMapPress}
-            windowBackgroundColor="rgba(0, 0, 0, .1)"
-            overlayBackgroundColor="rgba(0, 0, 0, .2)"
-            width={windowWidth}
-            height={windowHeight*0.3}
-            overlayStyle={styles.overlay}
-          >
-            <Card 
+            <Card containerStyle={styles.card}
               title={this.state.cardData.properties.Name}
             >
+              <Text>{"\n"}</Text>
+              <Text>{"\n"}</Text>
               <Button 
                 title="+ INFO"
                 //todavía sin funcionalidad
               />
             </Card>
-          </Overlay>
         );
       
       return null;
@@ -106,6 +95,7 @@ export default class MapScreen extends Component {
           <MapboxGL.MapView
             style={styles.map}
             styleURL={'mapbox://styles/dami-lopez95/ck1cq13s113cw1co4bncw4eqt'}
+            onPress={this.onMapPress}
           >
             {/* <MapboxGL.UserLocation 
               visible={true}
@@ -135,7 +125,7 @@ export default class MapScreen extends Component {
           </MapboxGL.MapView>
 
           {this.renderCard()}
-
+         
         </View>
       );
     }
