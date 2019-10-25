@@ -3,6 +3,7 @@ import { PermissionsAndroid, View, Text } from 'react-native'
 import { Card, Button } from 'react-native-elements'
 
 import SenderosGeoJSON from './senderos-pn-tdf.json'
+import PuntosInteresGeoJSON from './puntos_interes-pn-tdf'
 import MapboxGL from "@react-native-mapbox-gl/maps";
 
 import styles from './Styles/MapScreenStyles'
@@ -78,7 +79,6 @@ export default class MapScreen extends Component {
               title={this.state.cardData.properties.Name}
             >
               <Text>{"\n"}</Text>
-              <Text>{"\n"}</Text>
               <Button 
                 title="+ INFO"
                 //todavía sin funcionalidad
@@ -120,6 +120,17 @@ export default class MapScreen extends Component {
               <MapboxGL.LineLayer
                 id="senderos-pn-tdf"
                 style={{ lineColor: 'red', lineWidth: 7, visibility: 'visible' }}
+              />
+            </MapboxGL.ShapeSource>
+
+            <MapboxGL.ShapeSource 
+              id="PuntosInteresSource"
+              shape={PuntosInteresGeoJSON}
+              onPress={this.onSourceLayerPress}
+            >
+              <MapboxGL.CircleLayer
+                id="puntos_interes-pn-tdf"
+                style={{ circleColor: 'black', circleRadius: 9, circleBlur: 0.18, visibility: 'visible' }}
               />
             </MapboxGL.ShapeSource>
           </MapboxGL.MapView>
