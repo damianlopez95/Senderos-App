@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { PermissionsAndroid, View, Text } from 'react-native'
-import { Card, Button } from 'react-native-elements'
+import { Card, Button, ButtonGroup } from 'react-native-elements'
+
+import Icon from '../Images/Icons/baseline_star_black_36dp.png';
 
 import SenderosGeoJSON from './senderos-pn-tdf.json'
 import PuntosInteresGeoJSON from './puntos_interes-pn-tdf'
@@ -16,9 +18,13 @@ export default class MapScreen extends Component {
       super(props);
       this.onMapPress = this.onMapPress.bind(this);
       this.onSourceLayerPress = this.onSourceLayerPress.bind(this);
+      this.updateIndex = this.updateIndex.bind(this);
       this.state ={
+        showTrails: true,
+        showInterestPoints: true,
         showCard: false,
-        cardData: null
+        cardData: null,
+        selectedIndex: 2,
       }
     }
 
@@ -57,6 +63,29 @@ export default class MapScreen extends Component {
       }
     }
 
+    updateIndex (selectedIndex) {
+      switch(selectedIndex) {
+        case 0:
+          this.setState({
+            showTrails: true,
+            showInterestPoints: false,
+            selectedIndex})
+          break;
+        case 1:
+          this.setState({
+            showTrails: false,
+            showInterestPoints: true,
+            selectedIndex})
+          break;
+        case 2:
+          this.setState({
+            showTrails: true,
+            showInterestPoints: true,
+            selectedIndex})
+        break;
+      }
+    }
+
     onMapPress() {
       this.setState({
         showCard: false
@@ -90,8 +119,13 @@ export default class MapScreen extends Component {
     }
 
     render() {
+
+      //const buttons = ['Trails', 'Points of Interest', 'All']
+      const buttons = ['Senderos', 'Puntos de Interes', 'Todo']
+      const { selectedIndex } = this.state
+
       return (
-        <View style={styles.map_container}>
+        <View style={styles.container}>
           <MapboxGL.MapView
             style={styles.map}
             styleURL={'mapbox://styles/dami-lopez95/ck1cq13s113cw1co4bncw4eqt'}
@@ -120,6 +154,7 @@ export default class MapScreen extends Component {
               <MapboxGL.LineLayer
                 id="senderos-pn-tdf"
                 style={{ lineColor: 'red', lineWidth: 7, visibility: 'visible' }}
+                filter={this.state.showTrails ? ['all'] : ['==', 'Name', 'NoName']}
               />
             </MapboxGL.ShapeSource>
 
@@ -128,14 +163,23 @@ export default class MapScreen extends Component {
               shape={PuntosInteresGeoJSON}
               onPress={this.onSourceLayerPress}
             >
-              <MapboxGL.CircleLayer
+              <MapboxGL.SymbolLayer
                 id="puntos_interes-pn-tdf"
-                style={{ circleColor: 'black', circleRadius: 9, circleBlur: 0.18, visibility: 'visible' }}
+                style={{iconImage: Icon, iconSize: 0.7, iconAllowOverlap: true,
+                }}
+                filter={this.state.showInterestPoints ? ['all'] : ['==', 'Name', 'NoName']}
               />
             </MapboxGL.ShapeSource>
           </MapboxGL.MapView>
 
           {this.renderCard()}
+
+          <ButtonGroup
+            onPress={this.updateIndex}
+            selectedIndex={selectedIndex}
+            buttons={buttons}
+            containerStyle={styles.buttonGroup}
+          />
          
         </View>
       );

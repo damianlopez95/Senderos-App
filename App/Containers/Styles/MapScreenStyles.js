@@ -4,11 +4,14 @@ const windowWidth= Dimensions.get('window').width
 const windowHeight = Dimensions.get('window').height
 
 export default StyleSheet.create({
-  map_container: {
+  container: {
       flex: 1
     },
   map: {
-    flex: 1
+    flex: 9
+  },
+  buttonGroup: {
+    flex: 1,
   },
   overlay: {
     position: 'absolute',
