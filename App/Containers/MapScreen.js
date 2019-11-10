@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { PermissionsAndroid, View, Text, ScrollView, TouchableOpacity, Picker } from 'react-native'
-import { Card, Button } from 'react-native-elements'
+import { Card, Button, CheckBox } from 'react-native-elements'
 
 import SenderosGeoJSON from './senderos-pn-tdf.json'
+import SenderosEmergenciaGeoJSON from './senderos-emergencia-pn-tdf.json'
 import PuntosInteresGeoJSON from './puntos_interes-pn-tdf'
 import MapboxGL from "@react-native-mapbox-gl/maps"
 
@@ -22,12 +23,13 @@ export default class MapScreen extends Component {
       this.updateIndex = this.updateIndex.bind(this);
       this.state ={
         showTrails: true,
+        showEmergencyTrails: false,
         showInterestPoints: true,
         showCard: false,
         cardData: null,
         showFilters: false,
         trail: 'Todos',
-        layer: 'Todas'
+        layer: 'Todas',
       }
     }
 
@@ -166,6 +168,12 @@ export default class MapScreen extends Component {
                     <Picker.Item label="Puntos de Interes" value="Puntos de Interes"/>
                   </Picker>
                 </ScrollView>
+                <CheckBox
+                    containerStyle={{marginLeft: 0, width: '100%'}}
+                    title='Revelar senderos de emergencia'
+                    checked={this.state.showEmergencyTrails}
+                    onPress={() => this.setState({showEmergencyTrails: !this.state.showEmergencyTrails})}
+                  />
               </View>
             </View>
         );
@@ -202,7 +210,7 @@ export default class MapScreen extends Component {
             >
               <MapboxGL.LineLayer
                 id="senderos-pn-tdf"
-                style={{ lineColor: 'red', lineWidth: 7, visibility: 'visible' }}
+                style={{ lineColor: '#FF4136', lineWidth: 7, visibility: 'visible' }}
                 filter={this.state.showTrails ? (this.state.trail == 'Todos' ? ['all'] : ['==', 'Name', this.state.trail]) : ['==', 'Name', 'NoName']}
               />
             </MapboxGL.ShapeSource>
@@ -213,9 +221,18 @@ export default class MapScreen extends Component {
             >
               <MapboxGL.SymbolLayer
                 id="puntos_interes-pn-tdf"
-                style={{iconImage: IconStar, iconSize: 0.7, iconAllowOverlap: true,
+                style={{iconImage: IconStar, iconSize: 0.7, iconAllowOverlap: false,
                 }}
                 filter={this.state.showInterestPoints ? ['all'] : ['==', 'Name', 'NoName']}
+              />
+            </MapboxGL.ShapeSource>
+            <MapboxGL.ShapeSource 
+              id="senderosEmergenciaSource"
+              shape={SenderosEmergenciaGeoJSON}
+            >
+              <MapboxGL.LineLayer
+                id="senderos-emergencia-pn-tdf"
+                style={{ lineColor: '#0074D9', lineWidth: 7, visibility: this.state.showEmergencyTrails ? 'visible' : 'none' }}
               />
             </MapboxGL.ShapeSource>
           </MapboxGL.MapView>

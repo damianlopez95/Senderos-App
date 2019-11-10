@@ -40,7 +40,7 @@ export default StyleSheet.create({
   },
   filtersContainer: {
     width:windowWidth*0.96,
-    height:windowHeight*0.5,
+    height:windowHeight*0.54,
     bottom: 35,
     alignSelf: 'center',
     position:'absolute',

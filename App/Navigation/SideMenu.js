@@ -40,8 +40,8 @@ class SideMenu extends Component {
       <View style={styles.container}>
         <ScrollView>
           <View>
-            {this.options.map((option, key) => (
-              <View>
+            {this.options.map((option) => (
+              <View key={option.mainHeading}>
                 <Text style={styles.mainHeading}>{option.mainHeading}</Text>
                 {option.subOptions.map((item, key) => (
                   <View style={styles.secondaryHeading} key={key}>
