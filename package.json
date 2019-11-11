@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@react-native-mapbox-gl/maps": "^7.0.7",
+    "@turf/turf": "^5.1.6",
     "apisauce": "1.0.3",
     "format-json": "1.0.3",
     "identity-obj-proxy": "3.0.0",

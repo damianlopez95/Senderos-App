@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { Text, View, ScrollView, Button } from 'react-native'
+import { Text, View, ScrollView, Button, Image } from 'react-native'
 import { Divider } from 'react-native-elements'
 import FastImage from 'react-native-fast-image'
 
@@ -26,6 +26,15 @@ class FirstScreen extends Component {
   }
 
   componentDidMount() {
+
+    //Precargar iconos
+    const uris = []
+    for (var key in weatherIcons) {
+      uris.push({
+        uri: Image.resolveAssetSource(weatherIcons[key]).uri
+      })
+    }
+    FastImage.preload(uris);
 
     if (new Date().getHours() >= 6 && (new Date().getHours() < 21)) {
       this.setState({
