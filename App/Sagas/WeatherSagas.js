@@ -19,17 +19,14 @@ export function * getWeather (Api, action) {
   // get current data from Store
   // const currentData = yield select(WeatherSelectors.getData)
   // make the call to the api
-  console.warn('hola')
   const response = yield call(Api.getWeather)
 
   // success?
   if (response.ok) {
-    console.warn(response.data)
     // You might need to change the response here - do this with a 'transform',
     // located in ../Transforms/. Otherwise, just pass the data back from the api.
     yield put(WeatherActions.weatherSuccess(response.data))
   } else {
-    console.warn(response)
     yield put(WeatherActions.weatherFailure())
   }
 }

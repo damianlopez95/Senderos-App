@@ -1,32 +1,27 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, Button, Image, ActivityIndicator } from 'react-native'
-import { connect } from 'react-redux'
-import WeatherActions from '../Redux/WeatherRedux'
+import { Text, View, ScrollView, Button, Image } from 'react-native'
 
 import { Divider } from 'react-native-elements'
 import FastImage from 'react-native-fast-image'
 
+import weatherJSON from './weather-data.json'
+
 import weatherIcons from '../Images/Icons/WeatherIcons'
 import styles from './Styles/FirstScreenStyles'
 
-class FirstScreen extends Component {
+export default class FirstScreen extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      isLoading: true,
       currentDayTime: '',
+      currentDay: {},
+      nextDays: []
     };
   }
 
   componentDidMount() {
-    
-    //Llamado a fn dispatch. No debería llamarse más de una vez al día.
-    //Si se descomenta la linea se podrán visualizar los datos actualizados.
-    //Una vez obtenidos los datos comentar nuevamente y obtener datos de store.
-    //Para ver la screen sin desperdiciar llamadas a API -hay límite hasta 50/mes-, 
-    //se puede utilizar la screen 'oldFirstScreen.js' que recupera datos desde .json local y se visualiza idénticamente.
-
-    //this.props.requestAPI()
 
     //Precargar iconos
     const uris = []
@@ -39,7 +34,7 @@ class FirstScreen extends Component {
 
     //'Day' y 'Night' son dos valores necesarios para acceder a los datos.
     //En este caso decidí arbitrariamente que el día es desde 06AM hasta 21PM
-    if ((new Date().getHours() >= 6) && (new Date().getHours() < 21)) {
+    if (new Date().getHours() >= 6 && (new Date().getHours() < 21)) {
       this.setState({
         currentDayTime: 'Day'
       })
@@ -48,17 +43,22 @@ class FirstScreen extends Component {
         currentDayTime: 'Night'
       })
     }
+    this.setState({
+      currentDay: weatherJSON.DailyForecasts[0],
+      nextDays: [
+        weatherJSON.DailyForecasts[1], 
+        weatherJSON.DailyForecasts[2],
+        weatherJSON.DailyForecasts[3],
+        weatherJSON.DailyForecasts[4]
+      ],
+      isLoading: false
+    })
   }
 
   render () {
-    const { nextDays, currentDay } = this.props
 
-    if ((Object.keys(currentDay).length == 0) && (nextDays.length == 0)) {
-      return (
-        <View style={{flex: 1, paddingTop: 50}}>
-          <ActivityIndicator />
-        </View>
-      )
+    if (this.state.isLoading) {
+      return null
     } else {
       return (
         <View style={styles.container}>
@@ -70,48 +70,48 @@ class FirstScreen extends Component {
                   <Divider style={{ backgroundColor: 'black', height: 2 }} />
                   <Text style={{ alignSelf: 'center', paddingVertical: 10 }}>Today</Text>
                   <View style={styles.tempValuesContainer}>
-                    <Text style={[styles.tempValues, {color: '#0074D9'}]}>{Math.round((((currentDay.Temperature.Minimum.Value)-32)*(5/9))*10)/10}℃</Text>
+                    <Text style={[styles.tempValues, {color: '#0074D9'}]}>{Math.round((((this.state.currentDay.Temperature.Minimum.Value)-32)*(5/9))*10)/10}℃</Text>
                     <Text style={[styles.tempValues, {color: 'black'}]}>    -    </Text>
-                    <Text style={[styles.tempValues, { color: '#FF4136' }]}>{Math.round((((currentDay.Temperature.Maximum.Value)-32)*(5/9))*10)/10}℃</Text>
+                    <Text style={[styles.tempValues, { color: '#FF4136' }]}>{Math.round((((this.state.currentDay.Temperature.Maximum.Value)-32)*(5/9))*10)/10}℃</Text>
                   </View>
                   <View style={{alignItems: 'center'}}>
                     <FastImage style={{ width: 75, height: 75 }} 
                             source={{priority: FastImage.priority.high},
-                            weatherIcons[currentDay[this.state.currentDayTime].Icon]}/>
+                            weatherIcons[this.state.currentDay[this.state.currentDayTime].Icon]}/>
                   </View>
-                  <Text style={{ alignSelf: 'center', fontStyle: 'italic', paddingBottom: 10 }}>{currentDay.Night.ShortPhrase}</Text>
+                  <Text style={{ alignSelf: 'center', fontStyle: 'italic', paddingBottom: 10 }}>{this.state.currentDay.Night.ShortPhrase}</Text>
                   <View style={styles.rowContainer}>
                     <Text>Wind:</Text>
-                    <Text>{currentDay.Night.Wind.Speed.Value}mi/h {currentDay.Night.Wind.Direction.English}</Text>
+                    <Text>{this.state.currentDay.Night.Wind.Speed.Value}mi/h {this.state.currentDay.Night.Wind.Direction.English}</Text>
                   </View>
                   <Divider style={{ backgroundColor: 'black', marginBottom: 6}} />
                   <View style={styles.rowContainer}>
                     <Text>Rain Probability:</Text>
-                    <Text>{currentDay.Night.RainProbability}%</Text>
+                    <Text>{this.state.currentDay.Night.RainProbability}%</Text>
                   </View>
                   <Divider style={{ backgroundColor: 'black', marginBottom: 6}} />
                   <View style={styles.rowContainer}>
                     <Text>Snow Probability:</Text>
-                    <Text>{currentDay.Night.SnowProbability}%</Text>
+                    <Text>{this.state.currentDay.Night.SnowProbability}%</Text>
                   </View>
                   <Divider style={{ backgroundColor: 'black', marginBottom: 6}} />
                   <View style={styles.rowContainer}>
                     <Text>Ice Probability:</Text>
-                    <Text>{currentDay.Night.IceProbability}%</Text>
+                    <Text>{this.state.currentDay.Night.IceProbability}%</Text>
                   </View>
                 <Divider style={{ backgroundColor: 'black', marginBottom: 6}} />
                   <View style={styles.rowContainer}>
                     <Text>Real Feel Temp:</Text>
                     <View style={{flexDirection: 'row'}}>
-                      <Text style={{color: '#0074D9'}}>{Math.round((((currentDay.RealFeelTemperature.Minimum.Value)-32)*(5/9))*10)/10}℃</Text>
+                      <Text style={{color: '#0074D9'}}>{Math.round((((this.state.currentDay.RealFeelTemperature.Minimum.Value)-32)*(5/9))*10)/10}℃</Text>
                       <Text style={{color: 'black'}}>  -  </Text>
-                      <Text style={{color: '#FF4136'}}>{Math.round((((currentDay.RealFeelTemperature.Maximum.Value)-32)*(5/9))*10)/10}℃</Text>
+                      <Text style={{color: '#FF4136'}}>{Math.round((((this.state.currentDay.RealFeelTemperature.Maximum.Value)-32)*(5/9))*10)/10}℃</Text>
                     </View>
                   </View>
                 </View>
               </View>
               {
-                nextDays.map((item) =>{
+                this.state.nextDays.map((item) =>{
                   return(
                   <View key={item.Date} style={styles.nextDays}>
                     <View style={styles.rowContainer}>
@@ -143,20 +143,3 @@ class FirstScreen extends Component {
     }
   }
 }
-
-const mapStateToProps = (state) => {
-  return {
-    nextDays: state.weather.nextDays,
-    currentDay: state.weather.currentDay,
-  }
-}
-
-//Se utiliza para pedir de la API la info y almacenarla en store.
-const mapDispatchToProps = (dispatch) => {
-  return {
-    requestAPI: () => { dispatch(WeatherActions.weatherRequest(null))}
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(FirstScreen)
-
