@@ -11,6 +11,7 @@ export const reducers = combineReducers({
   search: require('./SearchRedux').reducer,
   //
   weather: require('./WeatherRedux').reducer,
+  interestPoints: require('./InterestPointsRedux').reducer,
 })
 
 export default () => {

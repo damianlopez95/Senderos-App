@@ -29,7 +29,7 @@ export default StyleSheet.create({
   },
   card: {
     width:windowWidth*0.96,
-    height:windowHeight*0.3,
+    height:windowHeight*0.45,
     position:'absolute',
     bottom: 25,
     backgroundColor: 'white',
@@ -37,6 +37,13 @@ export default StyleSheet.create({
     borderColor: 'white',
     borderWidth: 3,
     borderRadius: 0.5,
+  },
+  titulo: {
+    fontSize: 15,
+    color: 'black',
+    alignSelf: "center",
+    fontWeight: 'bold',
+    paddingVertical: 10,
   },
   filtersContainer: {
     width:windowWidth*0.96,

@@ -1,7 +1,26 @@
-{
-"type": "FeatureCollection",
-"name": "puntos_interes-pn-tdf",
-"features": [
+import { createReducer, createActions } from 'reduxsauce'
+import Immutable from 'seamless-immutable'
+
+//Se utiliza por ahora como demostración de funcionamiento.
+const testInterestPoints = {
+  "type": "FeatureCollection",
+  "name": "puntos_interes-pn",
+  "features": [
+    { "type": "Feature", "properties": {"id": 1, "Name": "a", "State": "oculto", "tessellate": -1, "extrude": 0, "visibility": 1, "drawOrder": null, "icon": null, "descripci__n": "", "TIPO": "SECCIONAL", "NOMBRE": "FENOCHIO", "ROTULO": "Secc. Fenochio", "AREA_PROTE": "Parque Nacional Tierra del Fuego" }, "geometry": { "type": "Point", "coordinates": [ -68.316743, -54.803225, 0.0 ] } },
+    { "type": "Feature", "properties": {"id": 2, "Name": "b", "State": "oculto", "tessellate": -1, "extrude": 0, "visibility": 1, "drawOrder": null, "icon": null, "descripci__n": "", "TIPO": "SECCIONAL", "NOMBRE": "LAPATAIA", "ROTULO": "Secc. Lapataia", "LATITUD": "54° 50' 37.88\" S", "LONGITUD": "68° 33' 34.40\" W", "ALTITUD": "10", "AREA_PROTE": "Parque Nacional Tierra del Fuego" }, "geometry": { "type": "Point", "coordinates": [ -68.316368, -54.803163, 0.0 ] } },
+    { "type": "Feature", "properties": {"id": 3, "Name": "c", "State": "oculto", "tessellate": -1, "extrude": 0, "visibility": 1, "drawOrder": null, "icon": null, "descripci__n": "", "TIPO": "SECCIONAL", "NOMBRE": "LA PORTADA", "ROTULO": "Secc. La Portada", "LATITUD": "54° 50' 5.079\" S", "LONGITUD": "68° 26' 52.37\" W", "ALTITUD": "138", "AREA_PROTE": "Parque Nacional Tierra del Fuego" }, "geometry": { "type": "Point", "coordinates": [ -68.316448, -54.803336, 0.0 ] } },
+    //UNTDF
+    { "type": "Feature", "properties": {"id": 4, "Name": "d", "State": "oculto", "tessellate": -1, "extrude": 0, "visibility": 1, "drawOrder": null, "icon": null, "descripci__n": "", "TIPO": "SECCIONAL", "NOMBRE": "FENOCHIO", "ROTULO": "Secc. Fenochio", "AREA_PROTE": "Parque Nacional Tierra del Fuego" }, "geometry": { "type": "Point", "coordinates": [ -68.328163, -54.825150, 0.0 ] } },
+    { "type": "Feature", "properties": {"id": 5, "Name": "e", "State": "oculto", "tessellate": -1, "extrude": 0, "visibility": 1, "drawOrder": null, "icon": null, "descripci__n": "", "TIPO": "SECCIONAL", "NOMBRE": "FENOCHIO", "ROTULO": "Secc. Fenochio", "AREA_PROTE": "Parque Nacional Tierra del Fuego" }, "geometry": { "type": "Point", "coordinates": [ -68.328052, -54.825292, 0.0 ] } },
+    { "type": "Feature", "properties": {"id": 6, "Name": "f", "State": "oculto", "tessellate": -1, "extrude": 0, "visibility": 1, "drawOrder": null, "icon": null, "descripci__n": "", "TIPO": "SECCIONAL", "NOMBRE": "FENOCHIO", "ROTULO": "Secc. Fenochio", "AREA_PROTE": "Parque Nacional Tierra del Fuego" }, "geometry": { "type": "Point", "coordinates": [ -68.327959, -54.825185, 0.0 ] } },
+  ]
+}
+
+//Se utilizarían de manera real ya pasada la demostración. Igualmente ya es funcional.
+const initialInterestPoints = {
+  "type": "FeatureCollection",
+  "name": "puntos_interes-pn-tdf",
+  "features": [
     { "type": "Feature", "properties": {"id": 1, "Name": "Secc. Fenochio", "State": "oculto", "description": "descripción: <br>TIPO: SECCIONAL<br>NOMBRE: FENOCHIO<br>ROTULO: Secc. Fenochio<br>LATITUD: 54° 50' 5.073\" S<br>LONGITUD: 68° 33' 37.00\" W<br>ALTITUD: 30<br>AREA_PROTE: Parque Nacional Tierra del Fuego<br>name: Secc. Fenochio", "timestamp": null, "begin": null, "end": null, "altitudeMode": null, "tessellate": -1, "extrude": 0, "visibility": -1, "drawOrder": null, "icon": null, "descripci__n": "", "TIPO": "SECCIONAL", "NOMBRE": "FENOCHIO", "ROTULO": "Secc. Fenochio", "LATITUD": "54° 50' 5.073\" S", "LONGITUD": "68° 33' 37.00\" W", "ALTITUD": "30", "AREA_PROTE": "Parque Nacional Tierra del Fuego" }, "geometry": { "type": "Point", "coordinates": [ -68.560278, -54.834743, 0.0 ] } },
     { "type": "Feature", "properties": {"id": 2, "Name": "Secc. Lapataia", "State": "oculto", "description": "descripción: <br>TIPO: SECCIONAL<br>NOMBRE: LAPATAIA<br>ROTULO: Secc. Lapataia<br>LATITUD: 54° 50' 37.88\" S<br>LONGITUD: 68° 33' 34.40\" W<br>ALTITUD: 10<br>AREA_PROTE: Parque Nacional Tierra del Fuego<br>name: Secc. Lapataia", "timestamp": null, "begin": null, "end": null, "altitudeMode": null, "tessellate": -1, "extrude": 0, "visibility": -1, "drawOrder": null, "icon": null, "descripci__n": "", "TIPO": "SECCIONAL", "NOMBRE": "LAPATAIA", "ROTULO": "Secc. Lapataia", "LATITUD": "54° 50' 37.88\" S", "LONGITUD": "68° 33' 34.40\" W", "ALTITUD": "10", "AREA_PROTE": "Parque Nacional Tierra del Fuego" }, "geometry": { "type": "Point", "coordinates": [ -68.559558, -54.843858, 0.0 ] } },
     { "type": "Feature", "properties": {"id": 3, "Name": "Secc. La Portada", "State": "oculto", "description": "descripción: <br>TIPO: SECCIONAL<br>NOMBRE: LA PORTADA<br>ROTULO: Secc. La Portada<br>LATITUD: 54° 50' 5.079\" S<br>LONGITUD: 68° 26' 52.37\" W<br>ALTITUD: 138<br>AREA_PROTE: Parque Nacional Tierra del Fuego<br>name: Secc. La Portada", "timestamp": null, "begin": null, "end": null, "altitudeMode": null, "tessellate": -1, "extrude": 0, "visibility": -1, "drawOrder": null, "icon": null, "descripci__n": "", "TIPO": "SECCIONAL", "NOMBRE": "LA PORTADA", "ROTULO": "Secc. La Portada", "LATITUD": "54° 50' 5.079\" S", "LONGITUD": "68° 26' 52.37\" W", "ALTITUD": "138", "AREA_PROTE": "Parque Nacional Tierra del Fuego" }, "geometry": { "type": "Point", "coordinates": [ -68.447883, -54.834744, 0.0 ] } },
@@ -63,3 +82,62 @@
     { "type": "Feature", "properties": {"id": 59, "Name": "", "State": "oculto", "description": "descripción: <br>TIPO: ESTACION FERROCARRIL<br>NOMBRE: ESTACION DEL FIN DEL MUNDO<br>ROTULO: Estación del Fin del Mundo<br>LATITUD: 54° 50' 0.122\" S<br>LONGITUD: 68° 25' 25.49\" W<br>ALTITUD: 75<br>AREA_PROTE: <br>name: ", "timestamp": null, "begin": null, "end": null, "altitudeMode": null, "tessellate": -1, "extrude": 0, "visibility": -1, "drawOrder": null, "icon": null, "descripci__n": "", "TIPO": "ESTACION FERROCARRIL", "NOMBRE": "ESTACION DEL FIN DEL MUNDO", "ROTULO": "Estación del Fin del Mundo", "LATITUD": "54° 50' 0.122\" S", "LONGITUD": "68° 25' 25.49\" W", "ALTITUD": "75", "AREA_PROTE": "" }, "geometry": { "type": "Point", "coordinates": [ -68.423748, -54.833367, 0.0 ] } }
   ]
 }
+
+/* ------------- Types and Action Creators ------------- */
+
+const { Types, Creators } = createActions({
+  interestPointsRequest: ['data'],
+  interestPointsSuccess: ['payload'],
+  interestPointsFailure: null,
+
+  updateData: ['data'],
+})
+
+export const InterestPointsTypes = Types
+export default Creators
+
+/* ------------- Initial State ------------- */
+
+export const INITIAL_STATE = Immutable({
+  data: testInterestPoints,
+  fetching: null,
+  payload: null,
+  error: null
+})
+
+/* ------------- Selectors ------------- */
+
+export const InterestPointsSelectors = {
+  getData: state => state.data
+}
+
+/* ------------- Reducers ------------- */
+
+// request the data from an api
+export const request = (state, { data }) =>
+  state.merge({ fetching: true, data, payload: null })
+
+// successful api lookup
+export const success = (state, action) => {
+  const { payload } = action
+  return state.merge({ fetching: false, error: null, payload })
+}
+
+// Something went wrong somewhere.
+export const failure = state =>
+  state.merge({ fetching: false, error: true, payload: null })
+
+//Se actualiza el estado de los puntos de interes
+export const updateData = (state, { data }) => {
+  return state.merge({ data: data })
+}
+
+/* ------------- Hookup Reducers To Types ------------- */
+
+export const reducer = createReducer(INITIAL_STATE, {
+  [Types.INTEREST_POINTS_REQUEST]: request,
+  [Types.INTEREST_POINTS_SUCCESS]: success,
+  [Types.INTEREST_POINTS_FAILURE]: failure,
+  //
+  [Types.UPDATE_DATA]: updateData,
+})
