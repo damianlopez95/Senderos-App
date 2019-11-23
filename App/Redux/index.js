@@ -10,8 +10,10 @@ export const reducers = combineReducers({
   github: require('./GithubRedux').reducer,
   search: require('./SearchRedux').reducer,
   //
+  language: require('./LanguageRedux').reducer,
   weather: require('./WeatherRedux').reducer,
   interestPoints: require('./InterestPointsRedux').reducer,
+  species: require('./SpeciesRedux').reducer,
 })
 
 export default () => {

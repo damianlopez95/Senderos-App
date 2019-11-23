@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { PermissionsAndroid, View, Text, ScrollView, TouchableOpacity, Picker } from 'react-native'
+import { PermissionsAndroid, View, Image, Text, ScrollView, TouchableOpacity, Picker } from 'react-native'
 import * as Animatable from 'react-native-animatable'
 import { Button, CheckBox, Divider } from 'react-native-elements'
 import { connect } from 'react-redux'
@@ -12,9 +12,8 @@ import booleanPointInPolygon from '@turf/boolean-point-in-polygon'
 //mapbox
 import SenderosGeoJSON from './senderos-pn-tdf.json'
 import SenderosEmergenciaGeoJSON from './senderos-emergencia-pn-tdf.json'
-import PuntosInteresGeoJSON from './puntos_interes-pn-tdf'
 import MapboxGL from "@react-native-mapbox-gl/maps"
-
+//
 import BlueLocationICON from '../Images/Icons/icons8-marker-blue.png'
 import RedLocationICON from '../Images/Icons/icons8-marker-red.png'
 import OptionIcon from 'react-native-vector-icons/Ionicons'
@@ -75,9 +74,21 @@ class MapScreen extends Component {
           styleURL: 'mapbox://styles/dami-lopez95/ck1cq13s113cw1co4bncw4eqt',
           minZoom: 10,
           maxZoom: 17,
-          bounds: [[-68.435974, -54.795375], [-68.620916, -54.916526]]
+          bounds: [[-68.32, -54.741], [-68.61, -54.90]]
         }, progressListener, null)
       }
+
+      //Las imágenes de los p. de interes quedan listas para ser renderizadas.
+      //Dependiendo del json inicial se podría hacer en componentDidUpdate(), pero por ahora no es necesario.
+      const uris = []
+      for (var i = 0; i < this.props.interestPoints.features.length; i++) {
+        uris.push({
+          uri: Image.resolveAssetSource(this.props.interestPoints.features[i].properties.photo).uri
+        })
+      }
+      FastImage.preload(uris);
+      //
+
     }
 
     onUserLocationUpdate(location) { //el t de actualización no es exactamente de 1s, a veces es mayor
@@ -157,7 +168,7 @@ class MapScreen extends Component {
                   <Divider style={{ backgroundColor: 'black', marginVertical: 6}} />
                   <FastImage style={{height: 160}} 
                              source={{priority: FastImage.priority.high},
-                             require('../Images/BahiaEnsenadaFoto.jpg')}
+                             this.state.cardData.properties.photo}
                   />
                 </ScrollView>
                 <Button 
@@ -281,7 +292,7 @@ class MapScreen extends Component {
 
                 //longitud, latitud
                 centerCoordinate={[-68.500416, -54.841684]}
-                //maxBounds={{ne: [-68.435974, -54.795375], sw: [-68.620916, -54.916526]}}
+                //maxBounds={{ne: [-68.32, -54.741], sw: [-68.61, -54.90]}}
               />
               <MapboxGL.ShapeSource 
                 id="senderosSource"
@@ -292,19 +303,6 @@ class MapScreen extends Component {
                   id="senderos-pn-tdf"
                   style={{ lineColor: '#FF4136', lineWidth: 7, visibility: this.state.showTrails ? 'visible' : 'none' }}
                   filter={this.state.trail == 'Todos' ? ['all'] : ['==', 'Name', this.state.trail]}
-                />
-              </MapboxGL.ShapeSource>
-
-              {/* Por ahora quedan los puntos del parque en este source */}
-              {/* Cuando no haya que demostrar pruebas ya se obtiene a través del storage */}
-              <MapboxGL.ShapeSource 
-                id="PuntosInteresSource"
-                shape={PuntosInteresGeoJSON}
-                onPress={this.onSourceLayerPress}
-              >
-                <MapboxGL.SymbolLayer
-                  id="puntos_interes-pn-tdf"
-                  style={{iconImage: RedLocationICON, iconSize: 0.5, iconAllowOverlap: false, visibility: this.state.showInterestPoints ? 'visible' : 'none' }}
                 />
               </MapboxGL.ShapeSource>
               <MapboxGL.ShapeSource 
