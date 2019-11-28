@@ -86,6 +86,7 @@ const { Types, Creators } = createActions({
   interestPointsFailure: null,
   //
   updateData: ['data'],
+  updateSelectedInterestPoint: ['interestPoint']
 })
 
 export const InterestPointsTypes = Types
@@ -95,6 +96,7 @@ export default Creators
 
 export const INITIAL_STATE = Immutable({
   data: initialInterestPoints,
+  selectedInterestPoint: null,
   fetching: null,
   payload: null,
   error: null
@@ -127,6 +129,11 @@ export const updateData = (state, { data }) => {
   return state.merge({ data: data })
 }
 
+//Se utiliza para acceder a la vista de un punto en particular mediante storage
+export const updateSelectedInterestPoint = (state, { interestPoint }) => {
+  return state.merge({ selectedInterestPoint: interestPoint })
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -135,4 +142,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.INTEREST_POINTS_FAILURE]: failure,
   //
   [Types.UPDATE_DATA]: updateData,
+  [Types.UPDATE_SELECTED_INTEREST_POINT]: updateSelectedInterestPoint,
 })
