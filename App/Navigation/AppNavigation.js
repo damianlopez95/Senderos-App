@@ -13,6 +13,8 @@ import TrailListScreen from '../Containers/TrailListScreen'
 import TrailScreen from '../Containers/TrailScreen'
 import PointsOfInterestListScreen from '../Containers/PointsOfInterestListScreen'
 import PointsOfInterestScreen from '../Containers/PointsOfInterestScreen'
+import FloraScreen from '../Containers/FloraScreen'
+import WildlifeScreen from '../Containers/WildlifeScreen'
 // import LaunchScreen from '../Containers/LaunchScreen'
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -116,10 +118,40 @@ const Screen5_StackNavigator = createStackNavigator({
 });
 
 const Screen6_StackNavigator = createStackNavigator({
-  Fifth: {
+  Sixth: {
     screen: PointsOfInterestScreen,
     navigationOptions: ({ navigation }) => ({
       title: 'Punto de interes',
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+ 
+      headerStyle: {
+        backgroundColor: '#2ECC40',
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+});
+
+const Flora_StackNavigator = createStackNavigator({
+  Eighth: {
+    screen: FloraScreen,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Flora',
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+ 
+      headerStyle: {
+        backgroundColor: '#2ECC40',
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+});
+
+const Wildlife_StackNavigator = createStackNavigator({
+  Ninth: {
+    screen: WildlifeScreen,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Flora',
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
  
       headerStyle: {
@@ -140,6 +172,8 @@ const Drawer = createDrawerNavigator(
     NavScreen4: { screen: Screen4_StackNavigator },
     NavScreen5: { screen: Screen5_StackNavigator },
     NavScreen6: { screen: Screen6_StackNavigator },
+    NavScreenFlora: { screen: Flora_StackNavigator },
+    NavScreenWildlife: { screen: Wildlife_StackNavigator }
   },
   {
     contentComponent: SideMenu,

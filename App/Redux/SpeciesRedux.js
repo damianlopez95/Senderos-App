@@ -102,10 +102,7 @@ const flora_ENG = {
 const { Types, Creators } = createActions({
   speciesRequest: ["data"],
   speciesSuccess: ["payload"],
-  speciesFailure: null,
-  //
-  updateSelectedSpecie: ['specie'],
-  updateType: ['type']
+  speciesFailure: null
 })
 
 export const SpeciesTypes = Types
@@ -122,9 +119,7 @@ export const INITIAL_STATE = Immutable({
   wildlifeSPA: wildlife_SPA,
   wildlifeENG: wildlife_ENG,
   floraSPA: flora_SPA,
-  floraENG: flora_ENG,
-  selectedSpecie: null,
-  selectedType: null
+  floraENG: flora_ENG
 })
 
 /* ------------- Selectors ------------- */
@@ -149,23 +144,11 @@ export const success = (state, action) => {
 export const failure = state =>
   state.merge({ fetching: false, error: true, payload: null })
 
-//
-export const updateSelectedSpecie = (state, { specie }) => {
-  return state.merge({ selectedSpecie: specie })
-}
-
-//
-export const updateType = (state, { type }) => {
-  return state.merge({ selectedType: type })
-}
 
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.SPECIES_REQUEST]: request,
   [Types.SPECIES_SUCCESS]: success,
-  [Types.SPECIES_FAILURE]: failure,
-  //
-  [Types.UPDATE_SELECTED_SPECIE]: updateSelectedSpecie,
-  [Types.UPDATE_TYPE]: updateType
+  [Types.SPECIES_FAILURE]: failure
 })
