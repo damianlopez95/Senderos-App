@@ -45,7 +45,10 @@ export const success = (state, action) => {
          error: null,
          data: payload,
          currentDay: payload.DailyForecasts[0],
-         nextDays: [payload.DailyForecasts[1], payload.DailyForecasts[2], payload.DailyForecasts[3], payload.DailyForecasts[4]]
+         nextDays: [payload.DailyForecasts[1],
+         payload.DailyForecasts[2],
+         payload.DailyForecasts[3],
+         payload.DailyForecasts[4]]
         })
 }
 

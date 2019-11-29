@@ -11,6 +11,9 @@ import FirstScreen from '../Containers/FirstScreen'
 import MapScreen from '../Containers/MapScreen'
 import TrailListScreen from '../Containers/TrailListScreen'
 import TrailScreen from '../Containers/TrailScreen'
+import PointsOfInterestListScreen from '../Containers/PointsOfInterestListScreen'
+import PointsOfInterestScreen from '../Containers/PointsOfInterestScreen'
+// import LaunchScreen from '../Containers/LaunchScreen'
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import SideMenu from './SideMenu'
@@ -97,6 +100,36 @@ const Screen4_StackNavigator = createStackNavigator({
   },
 });
 
+const Screen5_StackNavigator = createStackNavigator({
+  Fifth: {
+    screen: PointsOfInterestListScreen,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Lista Puntos de interes',
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+ 
+      headerStyle: {
+        backgroundColor: '#2ECC40',
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+});
+
+const Screen6_StackNavigator = createStackNavigator({
+  Fifth: {
+    screen: PointsOfInterestScreen,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Punto de interes',
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+ 
+      headerStyle: {
+        backgroundColor: '#2ECC40',
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+});
+
 //Drawer Navigator for the Navigation Drawer / Sidebar
 const Drawer = createDrawerNavigator(
   {
@@ -105,6 +138,8 @@ const Drawer = createDrawerNavigator(
     NavScreen2: { screen: Screen2_StackNavigator },
     NavScreen3: { screen: Screen3_StackNavigator },
     NavScreen4: { screen: Screen4_StackNavigator },
+    NavScreen5: { screen: Screen5_StackNavigator },
+    NavScreen6: { screen: Screen6_StackNavigator },
   },
   {
     contentComponent: SideMenu,

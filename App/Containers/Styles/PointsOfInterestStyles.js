@@ -1,22 +1,34 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
+
+const windowWidth= Dimensions.get('window').width
+const windowHeight = Dimensions.get('window').height
 
 export default StyleSheet.create({
-    container: {
-      flex: 1
+    main: {
+      paddingTop:0,
+      alignItems: "center"
     },
-    titulo: {
+    title: {
       fontSize: 28,
       color: 'black',
       alignSelf: "center",
-      padding: 15,
+      padding: 10,
       fontWeight: 'bold',
     },
-    image_container: {
-      padding: 5,
-    },
     image: {
-      width: null,
-      resizeMode: 'contain',
-      height: 300
+      width: windowWidth,
+      height: 350
+    },
+    content: {
+      flex: 1,
+      paddingLeft: 10,
+      flexDirection: "row",
+      alignItems: "center",
+      fontSize: 18,
+      marginBottom: 30,
+    },
+    divider: {
+      backgroundColor: 'green',
+      marginBottom: 20,
     }
-  })
+})

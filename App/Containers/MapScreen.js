@@ -175,6 +175,10 @@ class MapScreen extends Component {
                   title = "Details"
                   disabled = {this.state.cardData.properties.State == "visitado" ? false : true }
                   type="outline"
+                  onPress={() => {
+                    this.props.setSelectedIp(this.state.cardData.properties.id -1),
+                    this.props.navigation.navigate('NavScreen6')}
+                  }
                   //todavía sin funcionalidad
                 />
               </View>
@@ -363,7 +367,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateInterestPoints: (interestPoints) => dispatch(InterestPointsActions.updateData(interestPoints))
+    updateInterestPoints: (interestPoints) => dispatch(InterestPointsActions.updateData(interestPoints)),
+    setSelectedIp: (id) => {dispatch(InterestPointsActions.updateSelectedInterestPoint(id))}
   }
 }
 
