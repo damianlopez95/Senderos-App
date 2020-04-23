@@ -1,4 +1,45 @@
 #  Senderos-App
+
+Senderos App: Proyecto integrador final para la materia "Taller de Nuevas Tecnologías". UNTDF. 3er Año. 2019.
+
+Integrantes: Maciel Dario, Perez Ignacio, Lopez Damian.
+
+Desarrollo de aplicación móvil en JavaScript con el framework React Native.
+
+Plataforma funcional: Android.
+
+El proyecto surge para cubrir las necesidades del Parque Nacional Tierra del Fuego, que busca el desarrollo de una app interactiva que
+sirva a los visitantes del parque como guía interactiva y al mismo parque para obtener datos de interés con respecto a las zonas visitadas.
+
+Algunas de las características más importantes de la app:
+- Sirve como guía interactiva de los distintos atractivos turísticos del parque.
+- Se pueden listar especies, tanto flora como fauna, senderos existentes y diversos puntos de interés.
+- La app funciona de manera off-line ya que no existe recepción de wifi en el área.
+- Existe un mapa interactivo donde se pueden visualizar todos los senderos y los puntos de interés.
+- Los puntos de interés se irán desbloqueando (se da +info) cuando el usuario se acerque a la zona de ese punto.
+- Se muestra el pronóstico del tiempo de hasta los próximos cinco días.
+- Se pueden tomar fotografías y almacenar coordenadas por cuestiones de seguridad.
+
+La app NO es la versión oficial en desarrollo, se trata de la implementación de una parte del proyecto general para la universidad.
+
+Para conocer más información detallada, leer la documentación completa en ./document/Documentación.pdf.
+
+Tecnologías:
+
+- Lenguaje: JavaScript
+- Framework: React Native (v0.59.1)
+- Cli / Boilerplate: Ignite Andross
+- Persistencia: Redux (redux, react-redux, react-persist, redux-saga, reduxsauce)
+- Componentes visuales: React Native Elements
+- Mapas: Mapbox (react-native-mapbox-gl/maps)
+- Librería multi-idiomas: i18n
+- ...
+
+
+Acceso a repo de desarrollo alternativo: https://github.com/ignacioperez99/HikingTool
+
+
+
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
 
 * Standard compliant React Native App Utilizing [Ignite](https://github.com/infinitered/ignite)
